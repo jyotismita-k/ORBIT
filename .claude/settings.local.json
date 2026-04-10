@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest orbit --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\")",
+      "Bash(npm --version)",
+      "Bash(export PATH=\"/usr/local/bin:/opt/homebrew/bin:$PATH\")",
+      "Read(//Users/jyotismitakhataniar/.nvm/**)",
+      "Read(//Users/jyotismitakhataniar/**)"
+    ]
+  }
+}

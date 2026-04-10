@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  background: #fff280;
+  color: #2d2152;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Pixel-like checker texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.25;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.35);
+}
+::-webkit-scrollbar-thumb {
+  background: #7f63ff;
+  border-radius: 2px;
+}
+
+/* Retro card system */
+.glass {
+  background: #fff9d1;
+  border: 3px solid #2d2152;
+  border-radius: 0.75rem;
+  box-shadow: 6px 6px 0 #2d2152;
+}
+
+.glass-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+.glass-hover:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 7px 7px 0 #2d2152;
+  background: #fff6bd;
+}
+
+.pixel-title {
+  color: #2d2152;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.pixel-pill {
+  border: 3px solid #2d2152;
+  border-radius: 999px;
+  font-weight: 700;
+  padding: 0.3rem 0.7rem;
+}
+
+.cat {
+  background: #ff8ab4;
+  color: #3a1f2b;
+}
+
+.dragon {
+  background: #7f63ff;
+  color: #ffffff;
+}
+
+.coffee {
+  background: #c77d3f;
+  color: #fff7e7;
+}
+
+.car {
+  background: #36b8ff;
+  color: #082741;
+}
+
+.pixel-button {
+  border: 3px solid #2d2152;
+  border-radius: 0.65rem;
+  background: #8ce772;
+  color: #15330e;
+  font-weight: 700;
+  box-shadow: 4px 4px 0 #2d2152;
+}
+
+.pixel-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 #2d2152;
+}
+
+.pixel-button:disabled {
+  opacity: 0.5;
+  transform: none;
+  box-shadow: 2px 2px 0 #2d2152;
+}
+
+input:focus {
+  outline: none;
+}
