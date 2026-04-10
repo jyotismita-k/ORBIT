@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const DEFAULT_MINUTES = 25;
 const DEFAULT_SECONDS = DEFAULT_MINUTES * 60;
@@ -54,7 +55,11 @@ export default function Timer() {
   const strokeDashoffset = circumference * (1 - progress);
 
   return (
-    <section className="animate-slide-up">
+    <motion.section
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+    >
       <h2 className="text-xs uppercase pixel-title mb-3">
         Focus Timer
       </h2>
@@ -107,30 +112,58 @@ export default function Timer() {
 
           <div className="flex gap-2">
             {state !== "running" ? (
-              <button
+              <motion.button
                 onClick={start}
                 className="pixel-button px-3 py-1.5 text-xs transition-all active:scale-95"
+                whileHover={{ scale: 1.03, boxShadow: "0 6px 16px rgba(45, 33, 82, 0.16)" }}
+                whileTap={{ scale: 0.96 }}
               >
                 {state === "paused" ? "Resume" : "Start"}
-              </button>
+              </motion.button>
             ) : (
-              <button
+              <motion.button
                 onClick={pause}
                 className="pixel-button px-3 py-1.5 text-xs transition-all active:scale-95"
+                whileHover={{ scale: 1.03, boxShadow: "0 6px 16px rgba(45, 33, 82, 0.16)" }}
+                whileTap={{ scale: 0.96 }}
               >
                 Pause
-              </button>
+              </motion.button>
             )}
-            <button
+            <motion.button
               onClick={reset}
               disabled={state === "idle" && secondsLeft === DEFAULT_SECONDS}
               className="text-xs text-[#4d3f73] hover:text-[#2d2152] transition-colors disabled:opacity-20 px-1 font-semibold"
+              whileHover={
+                state === "idle" && secondsLeft === DEFAULT_SECONDS
+                  ? {}
+                  : { scale: 1.03 }
+              }
+              whileTap={
+                state === "idle" && secondsLeft === DEFAULT_SECONDS
+                  ? {}
+                  : { scale: 0.97 }
+              }
             >
               Reset
-            </button>
+            </motion.button>
           </div>
+          <AnimatePresence>
+            {state === "idle" && secondsLeft === 0 && (
+              <motion.p
+                key="session-complete"
+                initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.28, ease: "easeOut" }}
+                className="mt-2 text-xs font-semibold text-[#2d2152]"
+              >
+                Nice work! Session complete.
+              </motion.p>
+            )}
+          </AnimatePresence>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

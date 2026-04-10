@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import { generateId } from "../lib/utils";
 import type { Task } from "../lib/types";
 
@@ -66,7 +67,11 @@ export default function TaskList({ onTasksChange }: TaskListProps) {
   if (!mounted) return null;
 
   return (
-    <section className="animate-slide-up">
+    <motion.section
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+    >
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xs uppercase pixel-title">
           Today&apos;s Focus
@@ -92,11 +97,17 @@ export default function TaskList({ onTasksChange }: TaskListProps) {
           disabled={!canAdd}
           className="flex-1 glass px-3 py-2.5 text-sm text-[#2d2152] placeholder:text-[#6c6292] disabled:opacity-40 transition-all"
         />
-        <button
+        <motion.button
           onClick={addTask}
           disabled={!canAdd || !input.trim()}
           className="pixel-button px-3 py-2.5 text-sm transition-all active:scale-95"
           aria-label="Add task"
+          whileHover={
+            !canAdd || !input.trim()
+              ? {}
+              : { scale: 1.04, boxShadow: "0 8px 20px rgba(45, 33, 82, 0.16)" }
+          }
+          whileTap={!canAdd || !input.trim() ? {} : { scale: 0.96 }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +123,7 @@ export default function TaskList({ onTasksChange }: TaskListProps) {
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
-        </button>
+        </motion.button>
       </div>
 
       {/* Task list */}
@@ -150,7 +161,7 @@ export default function TaskList({ onTasksChange }: TaskListProps) {
           </>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -170,7 +181,7 @@ function TaskItem({
       }`}
     >
       {/* Checkbox */}
-      <button
+      <motion.button
         onClick={() => onToggle(task.id)}
         className={`flex-shrink-0 w-5 h-5 rounded-md border-[3px] border-[#2d2152] transition-all ${
           task.completed
@@ -178,6 +189,8 @@ function TaskItem({
             : "bg-[#fff9d1]"
         }`}
         aria-label={task.completed ? "Mark incomplete" : "Mark complete"}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.94 }}
       >
         {task.completed && (
           <svg
@@ -192,7 +205,7 @@ function TaskItem({
             <polyline points="20 6 9 17 4 12" />
           </svg>
         )}
-      </button>
+      </motion.button>
 
       {/* Text */}
       <span
@@ -206,10 +219,12 @@ function TaskItem({
       </span>
 
       {/* Delete */}
-      <button
+      <motion.button
         onClick={() => onDelete(task.id)}
         className="opacity-0 group-hover:opacity-100 text-[#6c6292] hover:text-[#2d2152] transition-all"
         aria-label="Delete task"
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -225,7 +240,7 @@ function TaskItem({
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
-      </button>
+      </motion.button>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { BOOSTER_ITEMS } from "../lib/data";
 import type { BoosterItem } from "../lib/types";
 
@@ -49,15 +50,21 @@ export default function MoodBooster() {
   }
 
   return (
-    <section className="animate-slide-up">
+    <motion.section
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+    >
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xs uppercase pixel-title">
           Mood Booster
         </h2>
-        <button
+        <motion.button
           onClick={refresh}
           className="text-xs text-[#4d3f73] hover:text-[#2d2152] transition-colors flex items-center gap-1.5 font-semibold"
           aria-label="Load another"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.96 }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -74,13 +81,13 @@ export default function MoodBooster() {
             <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
           </svg>
           Refresh
-        </button>
+        </motion.button>
       </div>
 
       {/* Category pills */}
       <div className="flex gap-1.5 mb-3">
         {CATEGORIES.map(({ value, label }) => (
-          <button
+          <motion.button
             key={value}
             onClick={() => changeCategory(value)}
             className={`pixel-pill text-xs transition-all ${
@@ -88,35 +95,55 @@ export default function MoodBooster() {
                 ? `${categoryClass(value)}`
                 : "bg-[#fff9d1] text-[#6c6292]"
             }`}
+            whileHover={{ scale: 1.03, y: -1 }}
+            whileTap={{ scale: 0.96 }}
+            animate={{ scale: activeCategory === value ? 1.04 : 1 }}
+            transition={{ duration: 0.18 }}
           >
             {label}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       {/* Image card */}
       <div className="glass overflow-hidden">
         <div className={`relative w-full h-44 ${categoryClass(activeCategory)}`}>
-          {!imgError ? (
-            <Image
-              key={current.id}
-              src={current.imageUrl}
-              alt={current.caption}
-              fill
-              className="object-cover opacity-90"
-              onError={() => setImgError(true)}
-              unoptimized
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-[#2d2152] text-sm font-semibold">
-              Image unavailable
-            </div>
-          )}
+          <AnimatePresence mode="wait">
+            {!imgError ? (
+              <motion.div
+                key={current.id}
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <Image
+                  src={current.imageUrl}
+                  alt={current.caption}
+                  fill
+                  className="object-cover opacity-90"
+                  onError={() => setImgError(true)}
+                  unoptimized
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="image-fallback"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="w-full h-full flex items-center justify-center text-[#2d2152] text-sm font-semibold"
+              >
+                Image unavailable
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         <div className={`px-3 py-2.5 ${categoryClass(activeCategory)}`}>
           <p className="text-xs italic font-semibold">{current.caption}</p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
