@@ -65,8 +65,12 @@ export default function MoodSelector({ onMoodChange }: MoodSelectorProps) {
             whileTap={{ scale: 0.96 }}
             animate={{
               scale: mood === value ? 1.04 : 1,
+              boxShadow:
+                mood === value
+                  ? "0 10px 24px rgba(127, 99, 255, 0.26)"
+                  : "0 6px 14px rgba(45, 33, 82, 0.12)",
             }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            transition={{ type: "spring", stiffness: 280, damping: 22 }}
           >
             <motion.span
               className={`text-xl leading-none font-bold ${

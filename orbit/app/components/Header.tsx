@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   getTimeOfDay,
   getGreeting,
@@ -28,7 +29,11 @@ export default function Header() {
   const affirmation = getAffirmation(timeOfDay);
 
   return (
-    <header className="animate-fade-in">
+    <motion.header
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+    >
       {/* Time block */}
       <div className="mb-5">
         <p className="text-5xl font-semibold tracking-tight text-[#2d2152] tabular-nums leading-none">
@@ -51,6 +56,6 @@ export default function Header() {
           &ldquo;{affirmation}&rdquo;
         </p>
       </div>
-    </header>
+    </motion.header>
   );
 }

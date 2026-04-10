@@ -18,7 +18,7 @@ body {
 }
 
 body {
-  background: #fff280;
+  background: #fff3a6;
   color: #2d2152;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -107,13 +107,6 @@ body {
 
 input:focus {
   outline: none;
-}
-body {
-  background-image: url("/backgrounds/pixel-town.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 .overlay {
   background: transparent;
