@@ -24,19 +24,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Pixel-like checker texture */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
-  background-size: 18px 18px;
-  opacity: 0.25;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -50,10 +37,10 @@ body::before {
 
 /* Retro card system */
 .glass {
-  background: #fff9d1;
+  background: rgba(255, 249, 209, 0.95);
   border: 3px solid #2d2152;
   border-radius: 0.75rem;
-  box-shadow: 6px 6px 0 #2d2152;
+  box-shadow: 6px 6px 0 #2d2152, 0 8px 26px rgba(0, 0, 0, 0.22);
 }
 
 .glass-hover {
@@ -129,6 +116,6 @@ body {
   background-attachment: fixed;
 }
 .overlay {
-  background: rgba(255, 255, 255, 0.58);
+  background: transparent;
   min-height: 100vh;
 }

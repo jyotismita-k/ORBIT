@@ -22,21 +22,19 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      {/* Layout: two-column on wide screens, single on mobile */}
-      <div className="max-w-4xl mx-auto px-4 py-8 md:py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {/* Left column */}
-          <div className="flex flex-col gap-6">
+      <div className="max-w-5xl mx-auto px-4 py-8 md:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-6">
             <Header />
-            <TaskList onTasksChange={handleTasksChange} />
             <Timer />
           </div>
-
-          {/* Right column */}
-          <div className="flex flex-col gap-6">
+          <div className="space-y-6">
             <MoodSelector onMoodChange={handleMoodChange} />
             <SuggestionBox mood={mood} tasks={tasks} />
           </div>
+        </div>
+        <div className="mt-6">
+          <TaskList onTasksChange={handleTasksChange} />
         </div>
       </div>
     </main>

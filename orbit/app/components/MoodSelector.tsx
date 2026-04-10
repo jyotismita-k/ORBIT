@@ -11,8 +11,8 @@ interface MoodSelectorProps {
 }
 
 const MOODS: { value: MoodLevel; label: string; symbol: string }[] = [
-  { value: "low", label: "Low", symbol: "—" },
-  { value: "neutral", label: "Neutral", symbol: "◦" },
+  { value: "low", label: "Low", symbol: "-" },
+  { value: "neutral", label: "Neutral", symbol: "o" },
   { value: "good", label: "Good", symbol: "+" },
 ];
 
@@ -56,7 +56,7 @@ export default function MoodSelector({ onMoodChange }: MoodSelectorProps) {
           <motion.button
             key={value}
             onClick={() => select(value)}
-            className={`flex-1 glass glass-hover py-2.5 flex flex-col items-center gap-1 transition-all active:scale-95 ${
+            className={`flex-1 glass glass-hover py-3 flex flex-col items-center gap-1.5 transition-all active:scale-95 ${
               mood === value
                 ? "bg-[#fff0a8]"
                 : "opacity-85 hover:opacity-100"
@@ -69,7 +69,7 @@ export default function MoodSelector({ onMoodChange }: MoodSelectorProps) {
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <motion.span
-              className={`text-base font-light ${
+              className={`text-xl leading-none font-bold ${
                 mood === value ? "text-[#2d2152]" : "text-[#6c6292]"
               }`}
               animate={{ scale: mood === value ? 1.05 : 1 }}
@@ -78,7 +78,7 @@ export default function MoodSelector({ onMoodChange }: MoodSelectorProps) {
               {symbol}
             </motion.span>
             <motion.span
-              className={`text-xs font-semibold ${
+              className={`text-sm leading-none font-bold ${
                 mood === value ? "text-[#2d2152]" : "text-[#6c6292]"
               }`}
               animate={{ scale: mood === value ? 1.03 : 1 }}
