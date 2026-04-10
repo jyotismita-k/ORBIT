@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 import MoodSelector from "./components/MoodSelector";
 import SuggestionBox from "./components/SuggestionBox";
-import MoodBooster from "./components/MoodBooster";
 import Timer from "./components/Timer";
 import type { MoodLevel, Task } from "./lib/types";
 
@@ -28,7 +27,17 @@ export default function Home() {
         className="fixed inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 15% 15%, rgba(255,138,180,0.4) 0%, transparent 38%), radial-gradient(circle at 85% 18%, rgba(54,184,255,0.35) 0%, transparent 38%), radial-gradient(circle at 80% 90%, rgba(127,99,255,0.35) 0%, transparent 40%), radial-gradient(circle at 20% 82%, rgba(199,125,63,0.25) 0%, transparent 42%)",
+            "radial-gradient(circle at 30% 20%, rgba(239, 251, 232, 0.38) 0%, transparent 38%), radial-gradient(circle at 78% 18%, rgba(178, 236, 198, 0.24) 0%, transparent 42%), radial-gradient(circle at 14% 82%, rgba(158, 225, 190, 0.22) 0%, transparent 40%), linear-gradient(180deg, #7fd5bf 0%, #73cdb7 40%, #68c4af 100%)",
+          backgroundSize: "100% 100%",
+        }}
+      />
+      <div
+        className="fixed inset-0 pointer-events-none opacity-45"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(233,255,244,0.5) 1px, transparent 1px), radial-gradient(rgba(102,189,153,0.35) 1px, transparent 1px)",
+          backgroundSize: "14px 14px, 14px 14px",
+          backgroundPosition: "0 0, 7px 7px",
         }}
       />
 
@@ -46,7 +55,6 @@ export default function Home() {
           <div className="flex flex-col gap-6">
             <MoodSelector onMoodChange={handleMoodChange} />
             <SuggestionBox mood={mood} tasks={tasks} />
-            <MoodBooster />
           </div>
         </div>
       </div>
