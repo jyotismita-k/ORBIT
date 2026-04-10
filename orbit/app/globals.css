@@ -121,3 +121,14 @@ body::before {
 input:focus {
   outline: none;
 }
+body {
+  background-image: url("/backgrounds/pixel-town.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.overlay {
+  background: rgba(255, 255, 255, 0.58);
+  min-height: 100vh;
+}
